@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './TodoForm.css';
 
 function TodoForm(props) {
@@ -14,8 +14,8 @@ function TodoForm(props) {
   };
   const onSubmit = (event) => {
     event.preventDefault();
-    navigate('/');
     props.submitEvent(newTodoValue);
+    navigate('/');
   };
 
   return (
