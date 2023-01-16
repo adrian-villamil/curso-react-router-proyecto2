@@ -12,11 +12,12 @@ import { EmptyTodos } from '../../ui/EmptyTodos';
 import { CreateTodoButton } from '../../ui/CreateTodoButton';
 // import { Modal } from '../../ui/Modal';
 import { ChangeAlert } from '../../ui/ChangeAlert';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 function HomePage() {
   const navigate = useNavigate();
   const { state, stateUpdaters } = useTodos();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const {
     error,
@@ -36,7 +37,7 @@ function HomePage() {
     setSearchValue,
     sincronizeTodos,
   } = stateUpdaters;
-  
+
   return (
     <React.Fragment>
       <TodoHeader loading={loading}>
@@ -47,6 +48,8 @@ function HomePage() {
         <TodoSearch
           searchValue={searchValue}
           setSearchValue={setSearchValue}
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
         />
       </TodoHeader>
 
@@ -68,7 +71,7 @@ function HomePage() {
             key={todo.id}
             text={todo.text}
             completed={todo.completed}
-            onEdit={() => navigate('/edit/' + todo.id, {state: {todoText: todo.text}})}
+            onEdit={() => navigate('/edit/' + todo.id, { state: { todoText: todo.text } })}
             onComplete={() => completeTodo(todo.id)}
             onDelete={() => deleteTodo(todo.id)}
           />
@@ -86,7 +89,7 @@ function HomePage() {
 
       <CreateTodoButton
         onClick={() => navigate('/new')}
-        // setOpenModal={setOpenModal}
+      // setOpenModal={setOpenModal}
       />
 
       <ChangeAlert
