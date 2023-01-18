@@ -12,12 +12,13 @@ import { EmptyTodos } from '../../ui/EmptyTodos';
 import { CreateTodoButton } from '../../ui/CreateTodoButton';
 // import { Modal } from '../../ui/Modal';
 import { ChangeAlert } from '../../ui/ChangeAlert';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useQuery } from '../useQuery';
 
 function HomePage() {
-  const navigate = useNavigate();
+  const history = useHistory();
   const { state, stateUpdaters } = useTodos();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { searchParams, setSearchParams } = useQuery();
 
   const {
     error,
@@ -71,7 +72,13 @@ function HomePage() {
             key={todo.id}
             text={todo.text}
             completed={todo.completed}
-            onEdit={() => navigate('/edit/' + todo.id, { state: { todoText: todo.text } })}
+            // onEdit={() => history('/edit/' + todo.id, { state: { todoText: todo.text } })}
+            onEdit={() => history.push({
+              pathname: '/edit/' + todo.id,
+              state: {
+                todoText: todo.text,
+              },
+            })}
             onComplete={() => completeTodo(todo.id)}
             onDelete={() => deleteTodo(todo.id)}
           />
@@ -88,7 +95,7 @@ function HomePage() {
       )} */}
 
       <CreateTodoButton
-        onClick={() => navigate('/new')}
+        onClick={() => history.push('/new')}
       // setOpenModal={setOpenModal}
       />
 
