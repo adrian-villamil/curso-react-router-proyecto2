@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { EditTodoPage } from './edit/EditTodoPage';
 import { HomePage } from './home/HomePage';
 import { NewTodoPage } from './new/NewTodoPage';
@@ -7,12 +7,12 @@ import { NewTodoPage } from './new/NewTodoPage';
 function App() {
   return (
     <HashRouter>
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/new' element={<NewTodoPage />} />
-        <Route path='/edit/:id' element={<EditTodoPage />} />
-        <Route path='*' element={<p>Not Found</p>} />
-      </Routes>
+      <Switch>
+        <Route exact path='/'><HomePage /></Route>
+        <Route path='/new'><NewTodoPage /></Route>
+        <Route path='/edit/:id'><EditTodoPage /></Route>
+        <Route path='*'><Redirect to='/' /></Route>
+      </Switch>
     </HashRouter>
   );
 }
