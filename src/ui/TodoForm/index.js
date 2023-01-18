@@ -1,21 +1,21 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import './TodoForm.css';
 
 function TodoForm(props) {
-  const navigate = useNavigate();
+  const history = useHistory();
   const [newTodoValue, setNewTodoValue] = React.useState(props.defaultTodoText || '');
 
   const onChange = (event) => {
     setNewTodoValue(event.target.value);
   };
   const onCancel = () => {
-    navigate('/');
+    history.push('/');
   };
   const onSubmit = (event) => {
     event.preventDefault();
     props.submitEvent(newTodoValue);
-    navigate('/');
+    history.push('/');
   };
 
   return (
