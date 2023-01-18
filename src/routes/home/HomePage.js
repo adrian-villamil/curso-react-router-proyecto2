@@ -8,9 +8,7 @@ import { TodoItem } from '../../ui/TodoItem';
 import { TodosError } from '../../ui/TodosError';
 import { TodosLoading } from '../../ui/TodosLoading';
 import { EmptyTodos } from '../../ui/EmptyTodos';
-// import { TodoForm } from '../../ui/TodoForm';
 import { CreateTodoButton } from '../../ui/CreateTodoButton';
-// import { Modal } from '../../ui/Modal';
 import { ChangeAlert } from '../../ui/ChangeAlert';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '../useQuery';
@@ -26,13 +24,10 @@ function HomePage() {
     searchedTodos,
     totalTodos,
     completedTodos,
-    // openModal,
     searchValue,
   } = state;
 
   const {
-    // setOpenModal,
-    // addTodo,
     completeTodo,
     deleteTodo,
     setSearchValue,
@@ -72,7 +67,6 @@ function HomePage() {
             key={todo.id}
             text={todo.text}
             completed={todo.completed}
-            // onEdit={() => history('/edit/' + todo.id, { state: { todoText: todo.text } })}
             onEdit={() => history.push({
               pathname: '/edit/' + todo.id,
               state: {
@@ -85,18 +79,8 @@ function HomePage() {
         )}
       </TodoList>
 
-      {/* {!!openModal && (
-        <Modal>
-          <TodoForm
-            addTodo={addTodo}
-            setOpenModal={setOpenModal}
-          />
-        </Modal>
-      )} */}
-
       <CreateTodoButton
         onClick={() => history.push('/new')}
-      // setOpenModal={setOpenModal}
       />
 
       <ChangeAlert
